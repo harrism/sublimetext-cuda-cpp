@@ -3,7 +3,15 @@ sublimetext-cuda-cpp
 
 CUDA C++ package for Sublime Text 2
 
+Syntax Highlighting
+-------------------
+
 Currently supports highlighting of all CUDA C/C++ syntax defined in Appendices [B][1] and [C][2] of the NVIDIA CUDA C Programming Guide.
+
+Snippets
+--------
+
+ - Execution Configuration: type "<<<"+[TAB] to get `<<<gridDim, blockDim, sharedBytes, streamId>>>()` with tab stops on each of the arguments.
 
 Contributing
 ------------
