@@ -4,5 +4,5 @@
 #define ${1:SYMBOL} ${2:value}
 #endif]]></content>
     <tabTrigger>def</tabTrigger>
-    <scope>source.c, source.c++, source.objc, source.objc++</scope>
+    <scope>source.c, source.c++, source.objc, source.objc++, source.cuda-c++</scope>
 </snippet>

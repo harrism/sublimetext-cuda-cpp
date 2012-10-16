@@ -9,5 +9,5 @@ public:
 	${0:/* data */}
 };]]></content>
     <tabTrigger>class</tabTrigger>
-    <scope>source.c++, source.objc++</scope>
+    <scope>source.c++, source.objc++, source.cuda-c++</scope>
 </snippet>
