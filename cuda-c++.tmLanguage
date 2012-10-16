@@ -23,139 +23,122 @@
 	<key>patterns</key>
 	<array>
 		<dict>
-			<key>match</key>
-			<string>\b(__global__|__device__|__constant__|__shared__)\b</string>
-			<key>name</key>
-			<string>storage.modifier.cuda_c++</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b__syncthreads\(\)\b</string>
-			<key>name</key>
-			<string>support.function.cuda_c++</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>(&lt;&lt;&lt;|&gt;&gt;&gt;)</string>
-			<key>name</key>
-			<string>keyword.operator.cuda_c++</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(dim3|char[1-4]|uchar[1-4]|short[1-4]|ushort[1-4]|int[1-4]|uint[1-4]|long[1-4]|ulong[1-4]|longlong[1-4]|ulonglong[1-4]|float[1-4]|double[1-4])\b</string>
-			<key>name</key>
-			<string>support.type.cuda_c++</string>
-		</dict>
-		<dict>
 			<key>include</key>
-			<string>#special_block</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>source.c</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(friend|explicit|virtual)\b</string>
-			<key>name</key>
-			<string>storage.modifier.c++</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(private:|protected:|public:)</string>
-			<key>name</key>
-			<string>storage.modifier.c++</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(catch|operator|try|throw|using)\b</string>
-			<key>name</key>
-			<string>keyword.control.c++</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\bdelete\b(\s*\[\])?|\bnew\b(?!])</string>
-			<key>name</key>
-			<string>keyword.control.c++</string>
+			<string>source.c++</string>
 		</dict>
 		<dict>
 			<key>comment</key>
-			<string>common C++ instance var naming idiom -- fMemberName</string>
+			<string>B.1 FUNCTION TYPE QUALIFIERS</string>
 			<key>match</key>
-			<string>\b(f|m)[A-Z]\w*\b</string>
+			<string>\b__(global|device|host|noinline|forceinline)__\b</string>
 			<key>name</key>
-			<string>variable.other.readwrite.member.c++</string>
+			<string>keyword.function.qualifier.cuda-c++</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>B.2 VARIABLE TYPE QUALIFIERS</string>
 			<key>match</key>
-			<string>\b(this)\b</string>
+			<string>\b__(device|constant|shared|restrict)__\b</string>
 			<key>name</key>
-			<string>variable.language.c++</string>
+			<string>storage.modifier.cuda-c++</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>B.3 BUILT-IN VECTOR TYPES</string>
 			<key>match</key>
-			<string>\btemplate\b\s*</string>
+			<string>\b(dim3|char[1-4]|uchar[1-4]|short[1-4]|ushort[1-4]|int[1-4]|uint[1-4]|long[1-4]|ulong[1-4]|longlong[1-4]|ulonglong[1-4]|float[1-4]|double[1-4])\b</string>
 			<key>name</key>
-			<string>storage.type.template.c++</string>
+			<string>support.type.cuda-c++</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>B.4 BUILT-IN VARIABLES</string>
 			<key>match</key>
-			<string>\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\b\s*</string>
+			<string>\b(gridDim|blockIdx|blockDim|threadIdx|warpSize)\b</string>
 			<key>name</key>
-			<string>keyword.operator.cast.c++</string>
+			<string>variable.language.cuda-c++</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>B.5 MEMORY FENCE FUNCTIONS</string>
 			<key>match</key>
-			<string>\b(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq)\b</string>
+			<string>\b__(threadfence_system|threadfence_block|threadfence)\b</string>
 			<key>name</key>
-			<string>keyword.operator.c++</string>
+			<string>support.function.cuda-c++</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>B.6 SYNCHRONIZATION FUNCTIONS</string>
 			<key>match</key>
-			<string>\b(class|wchar_t)\b</string>
+			<string>\b__(syncthreads_count|syncthreads_and|syncthreads_or|syncthreads)\b</string>
 			<key>name</key>
-			<string>storage.type.c++</string>
+			<string>support.function.cuda-c++</string>
 		</dict>
 		<dict>
+			<key>comment</key>
+			<string>B.8 TEXTURE FUNCTIONS</string>
 			<key>match</key>
-			<string>\b(export|mutable|typename)\b</string>
+			<string>\b(texCubemapLayered|tex1Dlayered|tex2Dlayered|tex2Dgather|tex1Dfetch|texCubemap|tex1D|tex2D|tex3D)\b</string>
 			<key>name</key>
-			<string>storage.modifier.c++</string>
+			<string>support.function.cuda-c++</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>B.9 SURFACE FUNCTIONS</string>
+			<key>match</key>
+			<string>\b(surfCubemapLayeredwrite|surfCubemapLayeredread|surf1DLayeredwrite|surf2DLayeredwrite|surf1DLayeredread|surf2DLayeredread|surfCubemapwrite|surfCubemapread|surf1Dwrite|surf2Dwrite|surf3Dwrite|surf1Dread|surf2Dread|surf3Dread)\b</string>
+			<key>name</key>
+			<string>support.function.cuda-c++</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>B.10 TIME FUNCTION</string>
+			<key>match</key>
+			<string>\b(clock|clock64)\b</string>
+			<key>name</key>
+			<string>support.function.cuda-c++</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>B.11 ATOMIC FUNCTIONS</string>
+			<key>match</key>
+			<string>\b(atomicExch|atomicAdd|atomicSub|atomicMin|atomicMax|atomicInc|atomicDec|atomicCAS|atomicAnd|atomicXor|atomicOr)\b</string>
+			<key>name</key>
+			<string>support.function.cuda-c++</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>B.12 WARP VOTE FUNCTIONS</string>
+			<key>match</key>
+			<string>\b__(ballot|all|any)\b</string>
+			<key>name</key>
+			<string>support.function.cuda-c++</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>B.13 WARP SHUFFLE FUNCTIONS</string>
+			<key>match</key>
+			<string>\b__(shfl_down|shfl_xor|shfl_up|shfl)\b</string>
+			<key>name</key>
+			<string>support.function.cuda-c++</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>B.14 PROFILER COUNTER FUNCTION</string>
+			<key>match</key>
+			<string>\b__(prof_trigger)\b</string>
+			<key>name</key>
+			<string>support.function.cuda-c++</string>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(?x)
-    				(?:  ^                                 # begin-of-line
-    				  |  (?: (?&lt;!else|new|=) )             #  or word + space before name
-    				)
-    				((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name
-    				 \s*(\()                           # start bracket or end-of-line
-    			</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>entity.name.function.c++</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.parameters.c</string>
-				</dict>
-			</dict>
+			<string>(&lt;&lt;&lt;)</string>
+			<key>comment</key>
+			<string>B.18 EXECUTION CONFIGURATION</string>
 			<key>end</key>
-			<string>\)</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.parameters.c</string>
-				</dict>
-			</dict>
+			<string>(&gt;&gt;&gt;)</string>
 			<key>name</key>
-			<string>meta.function.destructor.c++</string>
+			<string>keyword.operator.cuda-c++</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -165,337 +148,43 @@
 			</array>
 		</dict>
 		<dict>
-			<key>begin</key>
-			<string>(?x)
-    				(?:  ^                                 # begin-of-line
-    				  |  (?: (?&lt;!else|new|=) )             #  or word + space before name
-    				)
-    				((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name
-    				 \s*(\()                           # terminating semi-colon
-    			</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>entity.name.function.c++</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.parameters.c</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>\)</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.parameters.c</string>
-				</dict>
-			</dict>
+			<key>comment</key>
+			<string>B.19 LAUNCH BOUNDS</string>
+			<key>match</key>
+			<string>\b__launch_bounds__\b</string>
 			<key>name</key>
-			<string>meta.function.destructor.prototype.c++</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>$base</string>
-				</dict>
-			</array>
+			<string>support.function.qualifier.cuda-c++</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>C.2 INTRINSIC FUNCTIONS Table 6</string>
+			<key>match</key>
+			<string>\b__(sincosf|log10f|exp10f|log2f|logf|expf|powf|sinf|cosf|tanf)\b</string>
+			<key>name</key>
+			<string>support.function.cuda-c++</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>C.2 INTRINSIC FUNCTIONS Table 7</string>
+			<key>match</key>
+			<string>\b__((fsqrt|frcp|fadd|fmul|fmaf|fdiv)_(rn|rz|ru|rd)|frsqrt_rn|fdividef)\b</string>
+			<key>name</key>
+			<string>support.function.cuda-c++</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>C.2 INTRINSIC FUNCTIONS Table 8</string>
+			<key>match</key>
+			<string>\b__(dsqrt|dadd|dmul|ddiv|drcp|fma)_(rn|rz|ru|rd)\b</string>
+			<key>name</key>
+			<string>support.function.cuda-c++</string>
 		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
-		<key>angle_brackets</key>
-		<dict>
-			<key>begin</key>
-			<string>&lt;</string>
-			<key>end</key>
-			<string>&gt;</string>
-			<key>name</key>
-			<string>meta.angle-brackets.c++</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#angle_brackets</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>$base</string>
-				</dict>
-			</array>
-		</dict>
-		<key>block</key>
-		<dict>
-			<key>begin</key>
-			<string>\{</string>
-			<key>end</key>
-			<string>\}</string>
-			<key>name</key>
-			<string>meta.block.c++</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.any-method.c</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.parameters.c</string>
-						</dict>
-					</dict>
-					<key>match</key>
-					<string>(?x)
-    				(
-    					(?!while|for|do|if|else|switch|catch|enumerate|return|r?iterate)(?: \b[A-Za-z_][A-Za-z0-9_]*+\b | :: )*+                  # actual name
-    				)
-    				 \s*(\()</string>
-					<key>name</key>
-					<string>meta.function-call.c</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>$base</string>
-				</dict>
-			</array>
-		</dict>
-		<key>constructor</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>(?x)
-    				(?:  ^\s*)                             # begin-of-line
-    				((?!while|for|do|if|else|switch|catch|enumerate|r?iterate)[A-Za-z_][A-Za-z0-9_:]*) # actual name
-    				 \s*(\()                            # start bracket or end-of-line
-    			</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.c++</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.parameters.c</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>\)</string>
-					<key>endCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.parameters.c</string>
-						</dict>
-					</dict>
-					<key>name</key>
-					<string>meta.function.constructor.c++</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>$base</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>(?x)
-    				(:)                            # begin-of-line
-    				((?=\s*[A-Za-z_][A-Za-z0-9_:]* # actual name
-    				 \s*(\()))                      # start bracket or end-of-line
-    			</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.parameters.c</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>(?=\{)</string>
-					<key>name</key>
-					<string>meta.function.constructor.initializer-list.c++</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>$base</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
-		<key>special_block</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>\b(namespace)\s+([A-Za-z_][_A-Za-z0-9:]*\b)?+(?!\s*?(;|=|,))</string>
-					<key>end</key>
-					<string>(?&lt;=\})</string>
-					<key>name</key>
-					<string>meta.namespace-block.c++</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>begin</key>
-							<string>\{</string>
-							<key>end</key>
-							<string>\}</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#special_block</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>#constructor</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>$base</string>
-								</dict>
-							</array>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\b(class|struct)\s+([_A-Za-z][_A-Za-z0-9]*\b)</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>storage.type.c++</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.type.c++</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>(?&lt;=\})|(?=(;|,|\(|\)|&gt;|\[|\]))</string>
-					<key>name</key>
-					<string>meta.class-struct-block.c++</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#angle_brackets</string>
-						</dict>
-						<dict>
-							<key>begin</key>
-							<string>(\{)</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>1</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.scope.c++</string>
-								</dict>
-							</dict>
-							<key>end</key>
-							<string>(\})(\s*\n)?</string>
-							<key>endCaptures</key>
-							<dict>
-								<key>1</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.invalid.c++</string>
-								</dict>
-								<key>2</key>
-								<dict>
-									<key>name</key>
-									<string>invalid.illegal.you-forgot-semicolon.c++</string>
-								</dict>
-							</dict>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#special_block</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>#constructor</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>$base</string>
-								</dict>
-							</array>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>$base</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\b(extern)(?=\s*")</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>storage.modifier.c++</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>(?&lt;=\})|(?=\w)</string>
-					<key>name</key>
-					<string>meta.extern-block.c++</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>begin</key>
-							<string>\{</string>
-							<key>end</key>
-							<string>\}</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#special_block</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>$base</string>
-								</dict>
-							</array>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>$base</string>
-						</dict>
-					</array>
-				</dict>
-			</array>
-		</dict>
 	</dict>
 	<key>scopeName</key>
-	<string>source.cuda_c++</string>
+	<string>source.cuda-c++</string>
 	<key>uuid</key>
 	<string>e498cb33-bf6f-487b-8c77-02576bcb76dc</string>
 </dict>
