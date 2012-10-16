@@ -1,6 +1,6 @@
 {   "name": "CUDA C++",
     "scopeName": "source.cuda-c++",
-    "fileTypes": ["cu", "cuh"],
+    "fileTypes": ["cu", "cuh", "h"],
     "firstLineMatch": "-\\*- C\\+\\+ -\\*-", 
     "foldingStartMarker": "(?x)\n\t\t /\\*\\*(?!\\*)\n\t\t|^(?![^{]*?//|[^{]*?/\\*(?!.*?\\*/.*?\\{)).*?\\{\\s*($|//|/\\*(?!.*?\\*/.*\\S))\n\t", 
     "foldingStopMarker": "(?<!\\*)\\*\\*/|^\\s*\\}", 
