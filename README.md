@@ -11,9 +11,12 @@ Currently supports highlighting of all CUDA C/C++ syntax defined in Appendices [
 Snippets
 --------
 
- - `__syncthreads()`: `__s + [TAB]`
  - Execution Configuration: `<<< + [TAB]` --> `<<<gridDim, blockDim, sharedBytes, streamId>>>()` with tab stops on each of the arguments.
+ - `__syncthreads()`: `__s + [TAB]`
+ - cudaMalloc: `cmal` --> `cudaMalloc((void**)&variable, bytes);`
+ - cudaMemcpy: `cmem` --> `cudaMemcpy(dest, src, bytes, cudaMemcpyHostToDevice);`
  - All existing snippets from the C++ package included with Sublime Text 2
+
 
 Contributing
 ------------

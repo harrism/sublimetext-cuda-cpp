@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+cudaMemcopy(${1:dest}, ${2:src}, ${3:bytes}, cudaMemcpy${4:HostToDevice});
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cmem</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.cuda-c++</scope>
+</snippet>
