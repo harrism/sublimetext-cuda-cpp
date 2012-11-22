@@ -19,15 +19,22 @@ Snippets
 
 Installation
 ------------
-Install by cloning the repository to your Sublime Text 2 Packages directory:
 
-    cd <package directory>
+### Easy
+
+[Install via Package Control](http://wbond.net/sublime_packages/package_control)
+
+### Hard 
+
+* At a git-enabled command prompt, cd to Sublime Text 2 packages directory:  
+ * **OS X:** `~/Library/Application Support/Sublime Text 2/Packages/User`
+	* **Windows:** `%APPDATA%\Sublime Text 2\Packages\User`
+	* **Linux:** `~/.config/sublime-text-2/Packages/User`
+* Install by cloning the repository to your Sublime Text 2 Packages directory:
+
     git clone git://github.com/harrism/sublimetext-cuda-cpp.git
 
 Restart Sublime Text afterwards, switch to CUDA C++ as highlighting profile and try it out with one of the commands above.
-
-I am working on adding this package to Will Bond's excellent Package Control extension to make installation trivial.
-
 
 Contributing
 ------------
