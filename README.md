@@ -15,6 +15,7 @@ Snippets
  - `__syncthreads()`: `__s + [TAB]`
  - cudaMalloc: `cmal` --> `cudaMalloc((void**)&variable, bytes);`
  - cudaMemcpy: `cmem` --> `cudaMemcpy(dest, src, bytes, cudaMemcpyHostToDevice);`
+ - Kernel function prototype: `kernel` --> `__global__ void kernel()` with tab stops on the function name and inside the parentheses.
  - All existing snippets from the C++ package included with Sublime Text 2
 
 Installation
