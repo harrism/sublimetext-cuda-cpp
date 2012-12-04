@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-cudaMemcopy(${1:dest}, ${2:src}, ${3:bytes}, cudaMemcpy${4:HostToDevice});
+cudaMemcpy(${1:dest}, ${2:src}, ${3:bytes}, cudaMemcpy${4:Host}To${5:Device});
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>cmem</tabTrigger>
