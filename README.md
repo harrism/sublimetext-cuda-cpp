@@ -17,6 +17,24 @@ Snippets
  - cudaMemcpy: `cmem` --> `cudaMemcpy(dest, src, bytes, cudaMemcpyHostToDevice);`
  - All existing snippets from the C++ package included with Sublime Text 2
 
+Installation
+------------
+
+### Easy
+
+[Install via Package Control](http://wbond.net/sublime_packages/package_control)
+
+### Hard 
+
+* At a git-enabled command prompt, cd to Sublime Text 2 packages directory:  
+ * **OS X:** `~/Library/Application Support/Sublime Text 2/Packages/User`
+	* **Windows:** `%APPDATA%\Sublime Text 2\Packages\User`
+	* **Linux:** `~/.config/sublime-text-2/Packages/User`
+* Install by cloning the repository to your Sublime Text 2 Packages directory:
+
+    git clone git://github.com/harrism/sublimetext-cuda-cpp.git
+
+Restart Sublime Text afterwards, switch to CUDA C++ as highlighting profile and try it out with one of the commands above.
 
 Contributing
 ------------
