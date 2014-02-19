@@ -1,12 +1,12 @@
 sublimetext-cuda-cpp
 ====================
 
-CUDA C++ package for Sublime Text 2
+CUDA C++ package for Sublime Text 2 & 3
 
 Syntax Highlighting
 -------------------
 
-Currently supports highlighting of all CUDA C/C++ syntax defined in Appendices [B][1] and [C][2] of the NVIDIA CUDA C Programming Guide.
+Currently supports highlighting of all CUDA C/C++ syntax defined in Appendices [B][1] and [C][2] of the NVIDIA CUDA C Programming Guide (CUDA Toolkit v6.0).
 
 Snippets
 --------
@@ -14,9 +14,10 @@ Snippets
  - Execution Configuration: `<<< + [TAB]` --> `<<<gridDim, blockDim, sharedBytes, streamId>>>()` with tab stops on each of the arguments.
  - `__syncthreads()`: `__s + [TAB]`
  - cudaMalloc: `cmal` --> `cudaMalloc((void**)&variable, bytes);`
+ - cudaMallocManaged: `cmalmng` --> `cudaMallocManaged((void**)&variable, bytes);`
  - cudaMemcpy: `cmem` --> `cudaMemcpy(dest, src, bytes, cudaMemcpyHostToDevice);`
  - Kernel function prototype: `kernel` --> `__global__ void kernel()` with tab stops on the function name and inside the parentheses.
- - All existing snippets from the C++ package included with Sublime Text 2
+ - All existing snippets from the C++ package included with Sublime Text 2/3
 
 Installation
 ------------
