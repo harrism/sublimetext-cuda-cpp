@@ -159,7 +159,7 @@
 			<key>comment</key>
 			<string>B.18 DYNAMIC GLOBAL MEMORY ALLOCATION AND OPERATIONS</string>
 			<key>match</key>
-			<string>\(malloc|free|memcpy|memset)\b</string>
+			<string>\b(malloc|free|memcpy|memset)\b</string>
 			<key>name</key>
 			<string>support.function.cuda-c++</string>
 		</dict>
@@ -215,6 +215,8 @@
 	</array>
 	<key>repository</key>
 	<dict/>
+	<key>scopeName</key>
+	<string>source.cuda-c++</string>
 	<key>uuid</key>
 	<string>e498cb33-bf6f-487b-8c77-02576bcb76dc</string>
 </dict>

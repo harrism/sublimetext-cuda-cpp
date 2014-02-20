@@ -9,6 +9,7 @@
     "foldingStopMarker": "(?<!\\*)\\*\\*/|^\\s*\\}",
     "keyEquivalent": "^~C",
     "name": "CUDA C++",
+    "scopeName": "source.cuda-c++",
     "patterns": [
         {
             "include": "source.c++"
@@ -95,7 +96,7 @@
         },
         {
             "comment": "B.18 DYNAMIC GLOBAL MEMORY ALLOCATION AND OPERATIONS",
-            "match": "\\(malloc|free|memcpy|memset)\\b",
+            "match": "\\b(malloc|free|memcpy|memset)\\b",
             "name": "support.function.cuda-c++"
         },
         {
