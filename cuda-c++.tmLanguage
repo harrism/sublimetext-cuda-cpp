@@ -151,7 +151,7 @@
 			<key>comment</key>
 			<string>B.17 FORMATTED OUTPUT</string>
 			<key>match</key>
-			<string>\printf\b</string>
+			<string>\bprintf\b</string>
 			<key>name</key>
 			<string>support.function.cuda-c++</string>
 		</dict>
