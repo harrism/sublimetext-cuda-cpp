@@ -1,7 +1,7 @@
 sublimetext-cuda-cpp
 ====================
 
-CUDA C++ package for Sublime Text
+CUDA C++ package for Sublime Text 4. Sublime Text 3 is no longer supported; ST3 users can stay on release 1.0.2.
 
 Syntax Highlighting
 -------------------
