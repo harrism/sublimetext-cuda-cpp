@@ -1,0 +1,166 @@
+%YAML 1.2
+---
+# CUDA C++ syntax for Sublime Text 4.
+#
+# Extends the built-in C++ syntax and prepends CUDA rules to its contexts, so
+# CUDA keywords are highlighted everywhere C++ is (including inside function
+# bodies) and C++ still recognises function definitions such as
+# `__global__ void kernel()`.
+#
+# cuda-c++.tmLanguage is kept for GitHub Linguist, which highlights CUDA on
+# GitHub. Keep the keyword lists below in sync with it.
+name: CUDA C++
+scope: source.cuda-c++
+extends: Packages/C++/C++.sublime-syntax
+
+file_extensions:
+  - cu
+  - cuh
+
+variables:
+  # B.1 function and B.2 variable type qualifiers
+  cuda_qualifiers: __(?:global|device|host|noinline|forceinline|constant|managed|shared|restrict)__
+  # B.3 built-in vector types
+  cuda_types: dim3|(?:u?char|u?short|u?int|u?long|u?longlong|float|double)[1-4]
+  # B.4 built-in variables
+  cuda_variables: gridDim|blockIdx|blockDim|threadIdx|warpSize
+  # `<` followed by a `?` before any `>`: a comparison in a conditional, not a
+  # template argument list.
+  conditional_in_angles: <[^<>;]*\?
+  # B.5-B.15 and D.2 intrinsics. Standard C functions (printf, malloc, ...)
+  # are left to the C++ syntax.
+  cuda_functions: |-
+    (?x:
+      __threadfence(?:_system|_block)?
+    | __syncthreads(?:_count|_and|_or)?
+    | texCubemapLayered|tex1Dlayered|tex2Dlayered|tex2Dgather|tex1Dfetch|texCubemap|tex[1-3]D
+    | surfCubemapLayered(?:write|read)|surf[12]DLayered(?:write|read)|surfCubemap(?:write|read)|surf[1-3]D(?:write|read)
+    | __ldg
+    | clock64
+    | atomic(?:Exch|Add|Sub|Min|Max|Inc|Dec|CAS|And|Xor|Or)
+    | __(?:ballot|all|any)
+    | __shfl(?:_down|_xor|_up)?
+    | __prof_trigger
+    | __(?:fdividef|sincosf|log10f|exp10f|log2f|logf|expf|powf|sinf|cosf|tanf)
+    | __(?:fsqrt|frcp|fadd|fsub|fmul|fmaf|fdiv)_r[nzud]|__frsqrt_rn
+    | __(?:dsqrt|dadd|dsub|dmul|ddiv|drcp|fma)_r[nzud]
+    )
+
+contexts:
+  unique-modifiers:
+    - meta_prepend: true
+    - match: \b(?:{{cuda_qualifiers}})\b
+      scope: storage.modifier.cuda-c++
+
+  # B.20 launch bounds
+  modifiers-parens:
+    - meta_prepend: true
+    - match: \b(__launch_bounds__)\s*(\()
+      captures:
+        1: storage.modifier.cuda-c++
+        2: meta.group.c++ punctuation.section.group.begin.c++
+      push:
+        - meta_content_scope: meta.group.c++
+        - match: \)
+          scope: meta.group.c++ punctuation.section.group.end.c++
+          pop: true
+        - include: expressions
+
+  unique-types:
+    - meta_prepend: true
+    - match: \b(?:{{cuda_types}})\b
+      scope: support.type.cuda-c++
+
+  unique-variables:
+    - meta_prepend: true
+    - match: \b(?:{{cuda_variables}})\b
+      scope: variable.language.cuda-c++
+    - match: (?:(::)\s*)?\b({{cuda_functions}})\b
+      captures:
+        1: punctuation.accessor.double-colon.c++
+        2: support.function.cuda-c++
+
+  # B.19 execution configuration: kernel<<<grid, block>>>(args). Matched before
+  # C++ can read `kernel<` as the start of a template argument list. A bare
+  # `<<<` is a launch only right after a `>` or `)` (as in `kernel<T><<<...>>>`
+  # or `(kernel<T, U>)<<<...>>>`) or at the start of a line, and never when
+  # followed by `>`, so `operator<<<>`, a specialisation of operator<<, is not
+  # taken for one.
+  early-expressions-before-generic-type:
+    - meta_prepend: true
+    # Templated intrinsics, e.g. tex1Dfetch<float>(tex, i), which C++ would
+    # otherwise scope as a generic function call.
+    - match: (?:(::)\s*)?\b({{cuda_functions}})\s*(?={{generic_lookahead}})(<)
+      captures:
+        1: punctuation.accessor.double-colon.c++
+        2: support.function.cuda-c++
+        3: punctuation.definition.generic.begin.c++
+      push: template-call-arguments
+    - match: (?=(?:::\s*)?(?:{{identifier}}\s*::\s*)*(?!operator\b){{identifier}}\s*<<<)
+      push: kernel-launch-name
+    - match: (?<=[>)])\s*(<<<)(?!\s*>)
+      captures:
+        1: keyword.operator.kernel-launch.begin.cuda-c++
+      push: kernel-launch-configuration
+    # `<<<` starting a line, after the kernel name on the line before.
+    - match: ^\s*(<<<)(?!\s*>)
+      captures:
+        1: keyword.operator.kernel-launch.begin.cuda-c++
+      push: kernel-launch-configuration
+
+  kernel-launch-name:
+    - match: '::'
+      scope: punctuation.accessor.double-colon.c++
+    - match: '{{identifier}}(?=\s*::)'
+    - match: ({{identifier}})\s*(<<<)
+      captures:
+        1: variable.function.cuda-c++
+        2: keyword.operator.kernel-launch.begin.cuda-c++
+      set: kernel-launch-configuration
+    - match: (?=\S)
+      pop: true
+
+  kernel-launch-configuration:
+    - meta_scope: meta.kernel-launch.cuda-c++
+    - match: '>>>'
+      scope: keyword.operator.kernel-launch.end.cuda-c++
+      pop: true
+    # Recover from an unterminated launch (e.g. while typing) instead of
+    # swallowing the rest of the file.
+    - match: (?=[;)}])
+      pop: true
+    - include: early-expressions-before-generic-type
+    # A template call such as f<g<int>>() needs `<` directly after its name.
+    # It comes after the include above so casts and templated intrinsics win.
+    # C++'s own template detection is left out at this level, because it
+    # would read `n < m ? 1 : 2, 32>>>` as a template argument list and
+    # consume the closing `>>>`. Templates nested in parentheses are still
+    # detected by C++. A `?` before the next `>` means `<` is a comparison, as in
+    # `i<j ? 1 : 2, s > 0`.
+    - match: (?:(::)\s*)?({{identifier}})(?!{{conditional_in_angles}})(?={{generic_lookahead}}\s*\()(<)
+      captures:
+        1: punctuation.accessor.double-colon.c++
+        2: variable.function.c++
+        3: punctuation.definition.generic.begin.c++
+      push: template-call-arguments
+    # A template type followed by `::` (Traits<K<float>>::block_size), or a
+    # variable template followed by `,`, `>>>`, arithmetic or a shift
+    # (block_size_v<T>).
+    - match: (?:(::)\s*)?{{identifier}}(?!{{conditional_in_angles}})(?={{generic_lookahead}}\s*(?:::|,|>>|<<|[-+*/%]))(<)
+      captures:
+        1: punctuation.accessor.double-colon.c++
+        2: punctuation.definition.generic.begin.c++
+      push: template-call-arguments
+    - include: early-expressions-after-generic-type
+    - include: late-expressions
+
+  # Template arguments of a name recognised by a rule above: a templated call,
+  # a template type before `::`, or a variable template. Pops at the closing
+  # `>`, or at `;`, `)` or `}` if the `>` is missing.
+  template-call-arguments:
+    - match: '>'
+      scope: punctuation.definition.generic.end.c++
+      pop: true
+    - match: (?=[;)}])
+      pop: true
+    - include: expressions-minus-generic-type-function-call

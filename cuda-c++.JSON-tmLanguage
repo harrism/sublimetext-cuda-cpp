@@ -91,7 +91,7 @@
         },
         {
             "comment": "B.17 FORMATTED OUTPUT",
-            "match": "\\printf\\b",
+            "match": "\\bprintf\\b",
             "name": "support.function.cuda-c++"
         },
         {
