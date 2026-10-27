@@ -24,6 +24,10 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>include</key>
+			<string>source.c++</string>
+		</dict>
+		<dict>
 			<key>comment</key>
 			<string>B.1 FUNCTION TYPE QUALIFIERS</string>
 			<key>match</key>
@@ -207,10 +211,6 @@
 			<string>\b__(dsqrt|dadd|dsub|dmul|ddiv|drcp|fma)_(rn|rz|ru|rd)\b</string>
 			<key>name</key>
 			<string>support.function.cuda-c++</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>source.c++</string>
 		</dict>
 	</array>
 	<key>repository</key>

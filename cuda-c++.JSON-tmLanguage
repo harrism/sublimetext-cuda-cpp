@@ -12,6 +12,9 @@
     "scopeName": "source.cuda-c++",
     "patterns": [
         {
+            "include": "source.c++"
+        }, 
+        {
             "comment": "B.1 FUNCTION TYPE QUALIFIERS",
             "match": "\\b__(global|device|host|noinline|forceinline)__\\b",
             "name": "keyword.function.qualifier.cuda-c++"
@@ -126,10 +129,7 @@
             "comment": "D.2 INTRINSIC FUNCTIONS Table 10",
             "match": "\\b__(dsqrt|dadd|dsub|dmul|ddiv|drcp|fma)_(rn|rz|ru|rd)\\b",
             "name": "support.function.cuda-c++"
-        }, 
-        {
-            "include": "source.c++"
-        }
+        } 
     ], 
     "repository": {
     }, 
